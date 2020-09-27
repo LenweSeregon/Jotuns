@@ -1,0 +1,12 @@
+{
+  "name": "com.semicolon.jotuns",
+  "displayName": "Jotuns Engine",
+  "version": "0.0.1",
+  "description": "Jotuns Engine",
+  "unity": "2020.1",
+  "author": {
+    "name": "Semicolon - Nicolas Serf",
+    "email": "serf.nicolas@gmail.com"
+  },
+  "type": "tool"
+}
