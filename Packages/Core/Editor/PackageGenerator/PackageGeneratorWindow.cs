@@ -14,12 +14,13 @@
         private readonly string WINDOW_NAME = "Jotuns - Package generator";
         private readonly string ERROR_PACKAGE_NAME_EMPTY = "Package name cannot be empty";
         private readonly string ERROR_PACKAGE_AUTHOR_EMPTY = "Package Author cannot be empty";
-        private readonly string ERROR_PACKAGE_NOT_LOCAL = "Package is coming from a git URL. Need to be imported locally in order to " +
-                                                          "modify it and create a new package";
+        private readonly string ERROR_PACKAGE_NOT_LOCAL = "Package is coming from a git URL or master package hasn't been loaded. Need to be " +
+                                                          "imported locally in order to modify it and create a new package";
         private readonly string ERROR_PACKAGE_ALREADY_EXISTS = "Package with the same name already exists";
 
         private readonly string COMPANY = "com.semicolon.jotuns";
-        private readonly string PACKAGE_PATH = "Packages/" + "com.semicolon.jotuns";
+        private readonly string PACKAGE_MASTER_PATH = "Packages/" + "com.semicolon.jotuns";
+        private readonly string PACKAGE_CORE_PATH = "Packages/" + "com.semicolon.jotuns.core";
         private readonly string PACKAGE_DOCUMENTATION_FOLDER_NAME = "Documentation";
         private readonly string PACKAGE_RUNTIME_FOLDER_NAME = "Runtime";
         private readonly string PACKAGE_EDITOR_FOLDER_NAME = "Editor";
@@ -94,7 +95,8 @@
                 }
 
                 string lowerCasePackage = _packageName.ToLower();
-                string pathPackage = Path.GetFullPath(PACKAGE_PATH);
+                string pathPackage = Path.GetFullPath(PACKAGE_MASTER_PATH);
+                string pathCorePackage = Path.GetFullPath(PACKAGE_CORE_PATH);
                 string pathNewPackage = Path.Combine(pathPackage, "Packages", _packageName);
 
                 if (Directory.Exists(pathPackage) == false)
@@ -170,7 +172,7 @@
             string displayName = _packageName;
             string version = "0.0.1";
             string description = _packageName;
-            string unity = Application.unityVersion;
+            string unity = Application.unityVersion.Remove(Application.unityVersion.LastIndexOf("."));
             string authorName = _packageAuthor;
             string authorEmail = "";
             string type = "tool";
