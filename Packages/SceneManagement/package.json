@@ -1,0 +1,12 @@
+{
+    "name": "scenemanagement",
+    "displayName": "SceneManagement",
+    "version": "0.0.1",
+    "description": "SceneManagement",
+    "unity": "2020.1",
+    "author": {
+        "name": "Nicolas Serf",
+        "email": ""
+    },
+    "type": "tool"
+}

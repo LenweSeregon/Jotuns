@@ -37,8 +37,13 @@ Once you've done that, you can start adding content to your package into the cor
 
 Jotuns comes with an editor extension in Core package, that's allow Jotuns's user to create a new package by only specifying the package name and some options.
 
-Take care, even if the generation is made automatically, you need to specify into each Assembly Definition file which assembly definition reference needs to be added into the assembly file for example. The main obvious one is referencing the core package into the package runtime assembly created.
+Take care, even if the generation is made automatically, you may need to specify into each Assembly Definition file which assembly definition reference needs to be added into the assembly file for example.
 
 To access the generator : Window > Jotun > Core > Package Generator
 
 
+## Important note for creating a new package
+
+It is necessary to understand one point about developing a new package. You should in any case reference another package into your own package. The rule is simple : Except from core package, you should create your package as a standalone without any other dependency.
+
+To ensure that you are not using features of a Jotun's package except the Core one, simply never reference into your assembly definition a reference to an Assembly definition which is not the Core.

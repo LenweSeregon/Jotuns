@@ -1,6 +1,8 @@
 {
-    "name": "com.semicolon.jotuns.toto.tests",
-    "references": [],
+    "name": "com.semicolon.jotuns.scenemanagement.tests",
+    "references": [
+        "GUID:6d86018bf05867e47bd36fa8f0af5699"
+    ],
     "includePlatforms": [
         "Editor"
     ],

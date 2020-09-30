@@ -1,6 +1,8 @@
 {
-    "name": "com.semicolon.jotuns.toto",
-    "references": [],
+    "name": "com.semicolon.jotuns.scenemanagement",
+    "references": [
+        "GUID:e5a4f87aabe034f4c8c42ac4d9402efb"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [
         "Android",

@@ -11,6 +11,11 @@
         //////////////////////////////////////////
 
         #region Constants
+        private string GUID_CORE_ASSEMBLY_DEFINITION = "GUID:e5a4f87aabe034f4c8c42ac4d9402efb";
+        private string GUID_CORE_EDITOR_ASSEMBLY_DEFINITION = "GUID:0f55a2b1aac140340bc82cf382f38e7f";
+        private string GUID_CORE_TESTS_EDITOR_ASSEMBLY_DEFINITION = "GUID:5891e0307e34ae04c874f6a451fa28e1";
+        private string GUID_CORE_TESTS_RUNTIME_ASSEMBLY_DEFINITION = "GUID:6d86018bf05867e47bd36fa8f0af5699";
+        
         private readonly string WINDOW_NAME = "Jotuns - Package generator";
         private readonly string ERROR_PACKAGE_NAME_EMPTY = "Package name cannot be empty";
         private readonly string ERROR_PACKAGE_AUTHOR_EMPTY = "Package Author cannot be empty";
@@ -129,13 +134,13 @@
                 string pathRuntime = Path.Combine(pathNewPackage, PACKAGE_RUNTIME_FOLDER_NAME);
                 Directory.CreateDirectory(pathRuntime);
                 // Create runtime assembly definition
-                CreateAssemblyDefinitionAt(pathRuntime, COMPANY + "." + lowerCasePackage, false);
+                CreateAssemblyDefinitionAt(pathRuntime, COMPANY + "." + lowerCasePackage, false, GUID_CORE_ASSEMBLY_DEFINITION);
 
                 // Create editor folder
                 string pathEditor = Path.Combine(pathNewPackage, PACKAGE_EDITOR_FOLDER_NAME);
                 Directory.CreateDirectory(pathEditor);
                 // Create editor assembly definition
-                CreateAssemblyDefinitionAt(pathEditor, COMPANY + "." + lowerCasePackage + ".editor", true);
+                CreateAssemblyDefinitionAt(pathEditor, COMPANY + "." + lowerCasePackage + ".editor", true, GUID_CORE_EDITOR_ASSEMBLY_DEFINITION);
                 
                 // Create tests folder
                 if (_generateTests)
@@ -149,7 +154,7 @@
                         string pathTestEditor = Path.Combine(pathTests, PACKAGE_TESTS_EDITOR_FOLDER_NAME);
                         Directory.CreateDirectory(pathTestEditor);
                         // Create tests editor assembly definition
-                        CreateAssemblyDefinitionAt(pathTestEditor, COMPANY + "." + lowerCasePackage + ".tests.editor", true);
+                        CreateAssemblyDefinitionAt(pathTestEditor, COMPANY + "." + lowerCasePackage + ".tests.editor", true, GUID_CORE_TESTS_EDITOR_ASSEMBLY_DEFINITION);
                     }
 
                     if (_generateTestsEditorRuntime)
@@ -158,7 +163,7 @@
                         string pathTestRuntime = Path.Combine(pathTests, PACKAGE_TESTS_RUNTIME_FOLDER_NAME);
                         Directory.CreateDirectory(pathTestRuntime);
                         // Create tests runtime assembly definition
-                        CreateAssemblyDefinitionAt(pathTestRuntime, COMPANY + "." + lowerCasePackage + ".tests", true);
+                        CreateAssemblyDefinitionAt(pathTestRuntime, COMPANY + "." + lowerCasePackage + ".tests", true, GUID_CORE_TESTS_RUNTIME_ASSEMBLY_DEFINITION);
                     }
                 }
 
@@ -190,10 +195,10 @@
             }
         }
 
-        private void CreateAssemblyDefinitionAt(string path, string assemblyName, bool forEditor)
+        private void CreateAssemblyDefinitionAt(string path, string assemblyName, bool forEditor, string referenceCore)
         {
             string name = assemblyName;
-            string[] references = new string[] { };
+            string[] references = new string[] { referenceCore };
             string[] includePlatforms = null;
             string[] excludePlatforms = null;
             bool allowUnsafeCode = false;
