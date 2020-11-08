@@ -104,7 +104,8 @@
                 string pathCorePackage = Path.GetFullPath(PACKAGE_CORE_PATH);
                 string pathNewPackage = Path.Combine(pathPackage, "Packages", _packageName);
 
-                if (Directory.Exists(pathPackage) == false)
+				DirectoryInfo information = new DirectoryInfo(pathPackage);
+                if (Directory.Exists(pathPackage) == false || information.Attributes.HasFlag(FileAttributes.ReadOnly))
                 {
                     _generationDone = true;
                     _generatorError = true;
@@ -217,11 +218,7 @@
             else
             {
                 includePlatforms = new string[] { };
-                excludePlatforms = new string[]
-                {
-                    "Android", "Editor", "iOS", "LinuxStandalone64", "Lumin", "macOSStandalone", "PS4", "Stadia",
-                    "Switch", "tvOS", "WSA", "WebGL", "WindowsStandalone32", "WindowsStandalone64", "XboxOne"
-                };
+                excludePlatforms = new string[] { };
             }
 
             PackageGeneratorAssemblyJSON assembly = new PackageGeneratorAssemblyJSON(name, references,
