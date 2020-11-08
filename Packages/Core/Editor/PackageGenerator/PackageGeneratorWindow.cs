@@ -103,9 +103,8 @@
                 string pathPackage = Path.GetFullPath(PACKAGE_MASTER_PATH);
                 string pathCorePackage = Path.GetFullPath(PACKAGE_CORE_PATH);
                 string pathNewPackage = Path.Combine(pathPackage, "Packages", _packageName);
-
-				DirectoryInfo information = new DirectoryInfo(pathPackage);
-                if (Directory.Exists(pathPackage) == false || information.Attributes.HasFlag(FileAttributes.ReadOnly))
+                
+                if (Directory.Exists(pathPackage) == false || PackageFromGitURL(pathPackage))
                 {
                     _generationDone = true;
                     _generatorError = true;
@@ -170,6 +169,18 @@
 
                 AssetDatabase.Refresh();
             }
+        }
+
+        private bool PackageFromGitURL(string url)
+        {
+            string parentDirectory = Directory.GetParent(url).Name;
+            string folderName = Path.GetDirectoryName(url);
+            
+            if (string.IsNullOrEmpty(url)) return false;
+            if (string.IsNullOrEmpty(parentDirectory)) return false;
+            if (string.IsNullOrEmpty(folderName)) return false;
+            
+            return parentDirectory == "PackageCache" && folderName.Contains("@");
         }
 
         private void CreatePackageJsonFile(string pathRoot, string assemblyName)
