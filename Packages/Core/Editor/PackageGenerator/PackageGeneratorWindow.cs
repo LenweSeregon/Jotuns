@@ -174,7 +174,7 @@
         private bool PackageFromGitURL(string url)
         {
             string parentDirectory = Directory.GetParent(url).Name;
-            string folderName = Path.GetDirectoryName(url);
+            string folderName = new DirectoryInfo(url).Name;
             
             if (string.IsNullOrEmpty(url)) return false;
             if (string.IsNullOrEmpty(parentDirectory)) return false;
